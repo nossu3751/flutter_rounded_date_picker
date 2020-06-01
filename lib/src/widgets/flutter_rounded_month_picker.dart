@@ -266,29 +266,26 @@ class _FlutterRoundedMonthPickerState extends State<FlutterRoundedMonthPicker> w
 //      height: _kMaxDayPickerHeight,
       child: Stack(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: Semantics(
-              sortKey: _MonthPickerSortKey.calendar,
-              child: NotificationListener<ScrollStartNotification>(
+          Semantics(
+            sortKey: _MonthPickerSortKey.calendar,
+            child: NotificationListener<ScrollStartNotification>(
+              onNotification: (_) {
+                _chevronOpacityController.forward();
+                return false;
+              },
+              child: NotificationListener<ScrollEndNotification>(
                 onNotification: (_) {
-                  _chevronOpacityController.forward();
+                  _chevronOpacityController.reverse();
                   return false;
                 },
-                child: NotificationListener<ScrollEndNotification>(
-                  onNotification: (_) {
-                    _chevronOpacityController.reverse();
-                    return false;
-                  },
-                  child: PageView.builder(
-                    dragStartBehavior: widget.dragStartBehavior,
-                    key: ValueKey<DateTime>(widget.selectedDate),
-                    controller: _dayPickerController,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _monthDelta(widget.firstDate, widget.lastDate) + 1,
-                    itemBuilder: _buildItems,
-                    onPageChanged: _handleMonthPageChanged,
-                  ),
+                child: PageView.builder(
+                  dragStartBehavior: widget.dragStartBehavior,
+                  key: ValueKey<DateTime>(widget.selectedDate),
+                  controller: _dayPickerController,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _monthDelta(widget.firstDate, widget.lastDate) + 1,
+                  itemBuilder: _buildItems,
+                  onPageChanged: _handleMonthPageChanged,
                 ),
               ),
             ),

@@ -402,7 +402,7 @@ class FlutterRoundedDayPicker extends StatelessWidget {
     }
 
     return Padding(
-      padding: style?.paddingDatePicker ?? EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: style?.paddingDatePicker ?? EdgeInsets.symmetric(horizontal: 8, vertical: 20),
       child: Column(
         children: <Widget>[
           Container(
